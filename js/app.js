@@ -1,3 +1,14 @@
+const spriteData = {
+  'enemy': 'images/enemy-bug.png',
+  'characters': [
+    'images/char-boy.png',
+    'images/char-cat-girl.png',
+    'images/char-horn-girl.png',
+    'images/char-pink-girl.png',
+    'images/char-princess-girl.png'
+  ]
+};
+
 var Coordinates = function (x, y) {
   this.x = x;
   this.y = y;
@@ -20,7 +31,7 @@ var Enemy = function (coordinates, speed) {
   // a helper we've provided to easily load images
   this.coordinates = coordinates;
   this.speed = speed;
-  this.sprite = 'images/enemy-bug.png';
+  this.sprite = spriteData.enemy;
 };
 
 // Update the enemy's position, required method for game
@@ -75,6 +86,7 @@ Player.prototype.update = function (dt) {
 Player.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.coordinates.getX(), this.coordinates.getY());
   testData();
+  characterListGenerator();
 };
 
 Player.prototype.handleInput = function (keyPressEvent) {
@@ -180,6 +192,33 @@ var testData = function() {
   gameWrapper.appendChild(dataDiv);
 }
 
+// Character List Generator
+var characterListGenerator = function () {
+  if (
+    spriteData && spriteData.characters &&
+    spriteData.characters.length > 1
+  ) {
+    characterListDiv.innerHTML = '';
+    var messageTag = document.createElement('p');
+    messageTag.innerText = 'Click on one of the sprites below';
+    characterListDiv.appendChild(
+      messageTag
+    );
+    for (const character of spriteData.characters) {
+      if (player.sprite !== character) {
+        var characterDiv = document.createElement('span');
+        characterDiv.innerHTML = '<img src="' + character + '">';
+        characterDiv.addEventListener('click', function(e) {
+          player.sprite = e.target.attributes[0].value;
+        });
+        characterListDiv.appendChild(characterDiv);
+      }
+    }
+    var gameWrapper = document.getElementById('game-wrapper');
+    gameWrapper.appendChild(characterListDiv);
+  }
+}
+
 var enemyGenerator = function(enemyCount) {
   for (var count = 0; count < enemyCount; count ++) {
     var speed = Math.random() * 256;
@@ -203,7 +242,7 @@ var enemy = new Enemy(
 );
 allEnemies.push(enemy);
 
-var selectedSprite = 'images/char-boy.png';
+var selectedSprite = spriteData.characters[0];
 var playerStepSize = 50;
 const playerInitPosition = new Coordinates(202.5, 383);
 var player = new Player(
@@ -218,6 +257,7 @@ var scoreCounter = 0;
 var highestScore = 0;
 
 var dataDiv = document.createElement('pre');
+var characterListDiv = document.createElement('div');
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

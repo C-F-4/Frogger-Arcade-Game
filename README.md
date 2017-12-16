@@ -6,5 +6,5 @@ number of aliens to dodge.
 The player can see the game data on the top right tab on the page.
 
 ### To-Do
-- [ ] Character Options
+- [x] Character Options
 - [ ] Responsive Board Layout
