@@ -24,6 +24,22 @@ html, body {
   margin: 0;
   padding: 0;
   z-index: 9999;
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+.info {
+  color: coral;
+  font-size: 1em;
+  text-align: center;
+  padding: 1em 0;
+  font-family: 'stoke';
+  letter-spacing: 0.1em;
+  text-shadow: 0 -1px 0px rgba(243, 65, 0, 0.6), 0 -2px 0px rgba(208, 56, 0, 0.8);
+}
+
+.character:hover {
+  border: 1em solid coral;
+  cursor: pointer;
 }
 
 /* #game-wrapper canvas{
@@ -32,3 +48,61 @@ html, body {
   left: 50%;
   transform: translate(-50%, -50%);
 } */
+
+/* Speaker - Sound Control CSS */
+.speaker {
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: inline-block;
+  box-sizing: content-box;
+  border: 2px solid #000000;
+  background: #000000;
+}
+
+.speaker span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  margin: 11px 0 0 2px;
+}
+
+.speaker span:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+  border-width: 10px 14px 10px 15px;
+  left: -13px;
+  top: 5px;
+}
+
+.speaker span:before {
+  transform: rotate(45deg);
+  border-radius: 0 50px 0 0;
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-style: double;
+  border-color: #fff;
+  border-width: 7px 7px 0 0;
+  left: 18px;
+  top: 9px;
+  transition: all 0.2s ease-out;
+}
+
+.speaker:hover span:before {
+  transform: scale(0.8) translate(-3px, 0) rotate(42deg);
+}
+
+.speaker.mute span:before {
+  transform: scale(0.5) translate(-15px, 0) rotate(36deg);
+  opacity: 0;
+}

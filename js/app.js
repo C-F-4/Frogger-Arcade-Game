@@ -200,18 +200,20 @@ var characterListGenerator = function () {
   ) {
     characterListDiv.innerHTML = '';
     var messageTag = document.createElement('p');
+    messageTag.className = 'info';
     messageTag.innerText = 'Click on one of the sprites below';
     characterListDiv.appendChild(
       messageTag
     );
     for (const character of spriteData.characters) {
       if (player.sprite !== character) {
-        var characterDiv = document.createElement('span');
-        characterDiv.innerHTML = '<img src="' + character + '">';
-        characterDiv.addEventListener('click', function(e) {
+        var characterSpan = document.createElement('span');
+        characterSpan.className = 'character';
+        characterSpan.innerHTML = '<img src="' + character + '">';
+        characterSpan.addEventListener('click', function(e) {
           player.sprite = e.target.attributes[0].value;
         });
-        characterListDiv.appendChild(characterDiv);
+        characterListDiv.appendChild(characterSpan);
       }
     }
     var gameWrapper = document.getElementById('game-wrapper');

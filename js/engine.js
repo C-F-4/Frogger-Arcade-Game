@@ -30,7 +30,8 @@ var Engine = (function (global) {
   gameWrapper.appendChild(canvas);
 
   // Get the sound track and play it in background on repeat
-  var myAudio = new Audio('assets/bg_music.wav'); 
+  var myAudio = document.createElement('audio');
+  myAudio.src = ('assets/bg_music.wav'); 
   if (typeof myAudio.loop == 'boolean') {
     myAudio.loop = true;
   } else {
@@ -40,6 +41,20 @@ var Engine = (function (global) {
     }, false);
   }
   myAudio.play();
+
+  var musicControl = document.createElement('a');
+  musicControl.addEventListener('click', function(e) {
+    myAudio.muted = !myAudio.muted;
+    if (musicControl.className === 'speaker') {
+      musicControl.className = 'speaker mute';
+    } else {
+      musicControl.className = 'speaker';
+    }
+  });
+  musicControl.className = 'speaker';
+  musicControl.setAttribute('href', '#');
+  musicControl.appendChild(document.createElement('span'));
+  gameWrapper.appendChild(musicControl);
 
   /* This function serves as the kickoff point for the game loop itself
    * and handles properly calling the update and render methods.
