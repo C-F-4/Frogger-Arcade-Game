@@ -92,6 +92,7 @@ var Engine = (function (global) {
    */
   function init() {
     reset();
+    characterListGenerator();
     lastTime = Date.now();
     main();
   }

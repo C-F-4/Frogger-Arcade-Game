@@ -1,16 +1,22 @@
 html, body {
   /* width: 98vw; */
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   text-align: center;
 }
 
 #game-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: #ad79a9 url('http://presskit.ko-opmode.com/skipping_stones/images/sunsetpier.png') no-repeat;
+  background: #ad79a9 url('http://presskit.ko-opmode.com/skipping_stones/images/sunsetpier.png') no-repeat fixed center top;
+  background-size: cover;
+  padding-bottom: 2em;
+}
+
+.character-wrapper {
+  background: #ffffff;
 }
 
 .data {
@@ -38,7 +44,7 @@ html, body {
 }
 
 .character:hover {
-  border: 1em solid coral;
+  outline: 1em solid coral;
   cursor: pointer;
 }
 

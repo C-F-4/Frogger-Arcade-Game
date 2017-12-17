@@ -86,7 +86,6 @@ Player.prototype.update = function (dt) {
 Player.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.coordinates.getX(), this.coordinates.getY());
   testData();
-  characterListGenerator();
 };
 
 Player.prototype.handleInput = function (keyPressEvent) {
@@ -199,6 +198,7 @@ var characterListGenerator = function () {
     spriteData.characters.length > 1
   ) {
     characterListDiv.innerHTML = '';
+    characterListDiv.className = 'character-wrapper';
     var messageTag = document.createElement('p');
     messageTag.className = 'info';
     messageTag.innerText = 'Click on one of the sprites below';
@@ -212,6 +212,7 @@ var characterListGenerator = function () {
         characterSpan.innerHTML = '<img src="' + character + '">';
         characterSpan.addEventListener('click', function(e) {
           player.sprite = e.target.attributes[0].value;
+          characterListGenerator();
         });
         characterListDiv.appendChild(characterSpan);
       }
