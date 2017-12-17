@@ -15,10 +15,6 @@ html, body {
   padding-bottom: 2em;
 }
 
-.character-wrapper {
-  background: #ffffff;
-}
-
 .data {
   position: absolute;
   top: 0;
@@ -35,12 +31,23 @@ html, body {
 
 .info {
   color: coral;
+  background: #38131b;
   font-size: 1em;
   text-align: center;
   padding: 1em 0;
   font-family: 'stoke';
   letter-spacing: 0.1em;
   text-shadow: 0 -1px 0px rgba(243, 65, 0, 0.6), 0 -2px 0px rgba(208, 56, 0, 0.8);
+}
+
+.character-wrapper {
+  background: #ffffff;
+  padding-bottom: 1em;
+}
+
+.character {
+  display: inline-block;
+  margin: 0 0.5em;
 }
 
 .character:hover {
