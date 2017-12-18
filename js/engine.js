@@ -141,11 +141,15 @@ var Engine = (function (global) {
       'images/stone-block.png',   // Row 2 of 3 of stone
       'images/stone-block.png',   // Row 3 of 3 of stone
       'images/grass-block.png',   // Row 1 of 2 of grass
-      'images/grass-block.png'    // Row 2 of 2 of grass
+      'images/grass-block.png',   // Row 2 of 2 of grass
+      'images/Selector.png'
     ],
       numRows = 6,
       numCols = 5,
       row, col;
+      selectorPositionRowInImages = numRows;
+      selectorPositionRow = numRows - 1;
+      selectorPositionCol = Number.parseInt(numCols / 2, 10);
 
     // Before drawing, clear existing canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -164,6 +168,10 @@ var Engine = (function (global) {
          * we're using them over and over.
          */
         ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+        if (row === selectorPositionRow && col === selectorPositionCol) {
+          // Load selector block// Load selector block
+          ctx.drawImage(Resources.get(rowImages[selectorPositionRowInImages]), col * 101, row * 75);
+        }
       }
     }
 
