@@ -26,6 +26,33 @@ const spriteData = {
   ]
 };
 
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
+var allEnemies = new Array();
+var enemy = new Enemy(
+  new Coordinates(0, Math.random() * 184 + 50),
+  Math.random() * 256
+);
+allEnemies.push(enemy);
+
+var selectedSprite = spriteData.characters[0];
+var playerStepSize = 50;
+const playerInitPosition = new Coordinates(202.5, 383);
+var player = new Player(
+  playerInitPosition,
+  selectedSprite,
+  playerStepSize
+);
+
+var gameLevel = 1;
+var highLevel = 1;
+var scoreCounter = 0;
+var highestScore = 0;
+
+var dataDiv = document.createElement('pre');
+var characterListDiv = document.createElement('div');
+
 var Coordinates = function (x, y) {
   this.x = x;
   this.y = y;
@@ -38,29 +65,6 @@ Coordinates.prototype.getX = function () {
 Coordinates.prototype.getY = function () {
   return this.y;
 }
-
-var Gem = function (sprite, score, rarity, coordinates, isCollectable) {
-  this.sprite = sprite;
-  this.score = score;
-  this.rarity = rarity;
-  this.coordinates = coordinates;
-  this.isCollectable = isCollectable;
-};
-
-Gem.prototype.hasPlayerCollected = function () {
-  if (this.isCollectable) {
-    // update player score based on score
-    this.hide();
-  }
-};
-
-Gem.prototype.hide = function() {
-  this.isCollectable = false;
-};
-
-Gem.prototype.render = function () {
-  ctx.drawImage(Resources.get(this.sprite), this.coordinates.getX(), this.coordinates.getY());
-};
 
 // Enemies our player must avoid
 var Enemy = function (coordinates, speed) {
@@ -145,6 +149,29 @@ Player.prototype.handleInput = function (keyPressEvent) {
   if (keyPressEvent == 'up' && this.coordinates.getY() <= -37) {
     updateLevel(scoreCalculator(true));
   }
+};
+
+var Gem = function (sprite, score, rarity, coordinates, isCollectable) {
+  this.sprite = sprite;
+  this.score = score;
+  this.rarity = rarity;
+  this.coordinates = coordinates;
+  this.isCollectable = isCollectable;
+};
+
+Gem.prototype.hasPlayerCollected = function () {
+  if (this.isCollectable) {
+    // update player score based on score
+    this.hide();
+  }
+};
+
+Gem.prototype.hide = function() {
+  this.isCollectable = false;
+};
+
+Gem.prototype.render = function () {
+  ctx.drawImage(Resources.get(this.sprite), this.coordinates.getX(), this.coordinates.getY());
 };
 
 var scoreCalculator = function(isIncrement) {
@@ -280,34 +307,7 @@ var enemyGenerator = function(enemyCount) {
       )
     );
   }
-}
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-var allEnemies = new Array();
-var enemy = new Enemy(
-  new Coordinates(0, Math.random() * 184 + 50),
-  Math.random() * 256
-);
-allEnemies.push(enemy);
-
-var selectedSprite = spriteData.characters[0];
-var playerStepSize = 50;
-const playerInitPosition = new Coordinates(202.5, 383);
-var player = new Player(
-  playerInitPosition,
-  selectedSprite,
-  playerStepSize
-);
-
-var gameLevel = 1;
-var highLevel = 1;
-var scoreCounter = 0;
-var highestScore = 0;
-
-var dataDiv = document.createElement('pre');
-var characterListDiv = document.createElement('div');
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
