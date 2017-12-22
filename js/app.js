@@ -6,6 +6,23 @@ const spriteData = {
     'images/char-horn-girl.png',
     'images/char-pink-girl.png',
     'images/char-princess-girl.png'
+  ],
+  'gemTypes': [
+    {
+      'sprite': 'images/Gem-Blue.png',
+      'rarity': 1,
+      'score': 5
+    },
+    {
+      'sprite': 'images/Gem-Green.png',
+      'rarity': 2,
+      'score': 10
+    },
+    {
+      'sprite': 'images/Gem-Orange.png',
+      'rarity': 3,
+      'score': 20
+    }
   ]
 };
 
@@ -21,6 +38,29 @@ Coordinates.prototype.getX = function () {
 Coordinates.prototype.getY = function () {
   return this.y;
 }
+
+var Gem = function (sprite, score, rarity, coordinates, isCollectable) {
+  this.sprite = sprite;
+  this.score = score;
+  this.rarity = rarity;
+  this.coordinates = coordinates;
+  this.isCollectable = isCollectable;
+};
+
+Gem.prototype.hasPlayerCollected = function () {
+  if (this.isCollectable) {
+    // update player score based on score
+    this.hide();
+  }
+};
+
+Gem.prototype.hide = function() {
+  this.isCollectable = false;
+};
+
+Gem.prototype.render = function () {
+  ctx.drawImage(Resources.get(this.sprite), this.coordinates.getX(), this.coordinates.getY());
+};
 
 // Enemies our player must avoid
 var Enemy = function (coordinates, speed) {
@@ -59,7 +99,7 @@ Enemy.prototype.hasPlayerCollide = function (playerCoordinates) {
     console.log('Collision');
     updateLevel(scoreCalculator(false));
   }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
@@ -158,6 +198,9 @@ var updateLevel = function(updatedGameData) {
   // update player position
   setToInitPosition();
 
+  // generate gems
+  gemGenerator();
+
   // refill allEnemies
   var newEnemyCount = updatedGameData['enemyCount'];
   enemyGenerator(newEnemyCount);
@@ -221,6 +264,10 @@ var characterListGenerator = function () {
     gameWrapper.appendChild(characterListDiv);
   }
 }
+
+var gemGenerator = function() {
+  // Generate gems based on current level, and gemData  
+};
 
 var enemyGenerator = function(enemyCount) {
   for (var count = 0; count < enemyCount; count ++) {
