@@ -26,33 +26,6 @@ const spriteData = {
   ]
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-var allEnemies = new Array();
-var enemy = new Enemy(
-  new Coordinates(0, Math.random() * 184 + 50),
-  Math.random() * 256
-);
-allEnemies.push(enemy);
-
-var selectedSprite = spriteData.characters[0];
-var playerStepSize = 50;
-const playerInitPosition = new Coordinates(202.5, 383);
-var player = new Player(
-  playerInitPosition,
-  selectedSprite,
-  playerStepSize
-);
-
-var gameLevel = 1;
-var highLevel = 1;
-var scoreCounter = 0;
-var highestScore = 0;
-
-var dataDiv = document.createElement('pre');
-var characterListDiv = document.createElement('div');
-
 var Coordinates = function (x, y) {
   this.x = x;
   this.y = y;
@@ -308,6 +281,33 @@ var enemyGenerator = function(enemyCount) {
     );
   }
 };
+
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
+var allEnemies = new Array();
+var enemy = new Enemy(
+  new Coordinates(0, Math.random() * 184 + 50),
+  Math.random() * 256
+);
+allEnemies.push(enemy);
+
+var selectedSprite = spriteData.characters[0];
+var playerStepSize = 50;
+const playerInitPosition = new Coordinates(202.5, 383);
+var player = new Player(
+  playerInitPosition,
+  selectedSprite,
+  playerStepSize
+);
+
+var gameLevel = 1;
+var highLevel = 1;
+var scoreCounter = 0;
+var highestScore = 0;
+
+var dataDiv = document.createElement('pre');
+var characterListDiv = document.createElement('div');
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
