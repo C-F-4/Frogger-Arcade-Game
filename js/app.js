@@ -308,15 +308,22 @@ var highestScore = 0;
 
 var dataDiv = document.createElement('pre');
 var characterListDiv = document.createElement('div');
+// Allowed Controls
+var allowedKeys = {
+  37: 'left',
+  38: 'up',
+  39: 'right',
+  40: 'down'
+};
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
+document.addEventListener('keydown', function (e) {
+  if (typeof(allowedKeys[e.keyCode]) !== "undefined") {
+    event.preventDefault();
+  }
+});
+
 document.addEventListener('keyup', function (e) {
-  var allowedKeys = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down'
-  };
   player.handleInput(allowedKeys[e.keyCode]);
 });
