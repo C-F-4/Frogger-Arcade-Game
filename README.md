@@ -8,3 +8,4 @@ The player can see the game data on the top right tab on the page.
 ### To-Do
 - [x] Character Options
 - [ ] Responsive Board Layout
+- [ ] Mobile Control Support for Movement
