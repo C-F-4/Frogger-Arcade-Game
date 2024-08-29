@@ -13,6 +13,20 @@ html, body {
   background: #ad79a9 url('https://i.imgur.com/Y03a3wq.png') no-repeat fixed center top;
   background-size: cover;
   padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.canvas-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-wrapper canvas {
+  flex: 0;
 }
 
 .data {
