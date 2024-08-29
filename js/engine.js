@@ -27,7 +27,9 @@ var Engine = (function (global) {
   canvas.width = 505;
   canvas.height = 606;
   var gameWrapper = document.getElementById('game-wrapper');
-  gameWrapper.appendChild(canvas);
+  var canvasWrapper = document.createElement('div');
+  canvasWrapper.appendChild(canvas);
+  gameWrapper.appendChild(canvasWrapper);
 
   // Get the sound track and play it in background on repeat
   var myAudio = document.createElement('audio');
@@ -40,7 +42,11 @@ var Engine = (function (global) {
       this.play();
     }, false);
   }
-  myAudio.play();
+  const audioLoder = () => {
+    myAudio.play();
+    win.removeEventListener('click', audioLoader);
+  };
+  win.addEventListener('click', audioLoader);
 
   var musicControl = document.createElement('a');
   musicControl.addEventListener('click', function(e) {
