@@ -26,8 +26,9 @@ var Engine = (function (global) {
 
   canvas.width = 505;
   canvas.height = 606;
-  var gameWrapper = document.getElementById('game-wrapper');
-  var canvasWrapper = document.createElement('div');
+  var gameWrapper = doc.getElementById('game-wrapper');
+  var canvasWrapper = doc.createElement('div');
+  canvasWrapper.className = 'canvas-wrapper';
   canvasWrapper.appendChild(canvas);
   gameWrapper.appendChild(canvasWrapper);
 
@@ -42,7 +43,7 @@ var Engine = (function (global) {
       this.play();
     }, false);
   }
-  const audioLoder = () => {
+  const audioLoader = () => {
     myAudio.play();
     win.removeEventListener('click', audioLoader);
   };
